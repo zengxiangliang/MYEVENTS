@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>测试myEvent</title>
+</head>
+<body>
+<button id="btn1" style="font-size: 3em;">fire</button>
+<button id="btn2" style="font-size: 3em;">fire</button>
+<script src="jquery.min.js"></script>
+<script src="MYEVENTS.js"></script>
+<script>
+	var myEvent = new MyEvent();
+	function all() {
+		function f1(){
+			console.log('f1');
+		}
+		function f2(){
+			console.log('f2');
+		}
+		function f3(){
+			console.log('f3');
+		}
+		myEvent.addEvent('myClick',f1,f2,f3);
+		
+		myEvent.removeEvent('myClick',f2);
+		
+		myEvent.addEvent('span',f2);
+	}
+	all();
+	/*document.querySelector('button').addEventListener('click',function (){
+		myEvent.fireEvent({
+			type: ['myClick','span']
+		});
+	},false);*/
+	
+	$('#btn1').on('myClick',function () {
+		console.log('JQUERY自定义事件');
+	});
+	$('#btn2').on('click',function (){
+		$('#btn1').trigger('myClick');
+	})
+</script>
+</body>
+</html>
